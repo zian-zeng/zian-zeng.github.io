@@ -1,7 +1,7 @@
 ---
 title: '《Saber Quest: Echoes of the Fallen》'
 date: 2023-12-06
-external_link: https://github.com/ZianZengUH/Saber_Quest_UE4
+external_link: https://github.com/zian-zeng/Saber_Quest_UE4
 tags:
   - Virtual Reality
   - Game Development

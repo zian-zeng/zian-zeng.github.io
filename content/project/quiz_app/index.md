@@ -1,7 +1,7 @@
 ---
 title: 'Capstone Project: Quiz APP'
 date: 2024-05-01
-external_link: https://github.com/ZianZengUH/Quiz-App
+external_link: https://github.com/zian-zeng/Quiz-App
 tags:
   - Flutter
   - Singleton WebSocket

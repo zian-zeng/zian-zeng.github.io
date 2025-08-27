@@ -38,7 +38,7 @@ profiles:
   # - icon: brands/instagram
   #   url: https://www.instagram.com/
   - icon: brands/github
-    url: https://github.com/ZianZengUH
+    url: https://github.com/zian-zeng
   - icon: brands/linkedin
     url: www.linkedin.com/in/zian-zeng
   - icon: academicons/google-scholar
