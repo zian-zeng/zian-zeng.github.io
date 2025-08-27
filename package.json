@@ -1,0 +1,19 @@
+{
+  "name": "zianzenguh.github.io",
+  "version": "1.0.0",
+  "description": "[![Screenshot](.github/preview.webp)](https://hugoblox.com/templates/)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "simplex-noise": "^4.0.3"
+  },
+  "devDependencies": {
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1"
+  }
+}
