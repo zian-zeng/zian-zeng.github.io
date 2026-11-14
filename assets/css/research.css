@@ -138,6 +138,7 @@
 @media print{body{background:white;color:#111}.cv-nav,.site-footer{display:none}.cv-document{margin:0;padding:0;border:0;box-shadow:none;max-width:none}.cv-section{margin-top:20px}.cv-entry,.research-skills>div{break-inside:avoid}.cv-section h2{break-after:avoid;color:#222}.cv-title h1{font-size:32px}.cv-entry p,.research-skills dd{color:#333}.cv-contacts a{text-decoration:none}}
 
 /* Undergraduate project rows */
+.cv-research-direction{margin-top:20px;font-size:18px;line-height:1.7;font-style:italic;color:var(--muted)}
 .undergraduate-projects{margin-top:48px;padding-top:34px;border-top:1px solid #44604e;scroll-margin-top:112px}
 .undergraduate-projects-heading{display:flex;align-items:baseline;justify-content:space-between;gap:16px 30px;margin-bottom:24px}
 .undergraduate-projects-heading h3{font:30px/1.25 var(--serif);letter-spacing:-.4px}
