@@ -136,3 +136,28 @@
 @media(max-width:780px){.hero-highlight{width:100%;border-top:1px solid var(--line);padding-top:16px}.hackathon-feature{padding:28px;margin-top:6px}.hackathon-topline{flex-wrap:wrap;gap:8px}.organizer-brands{gap:18px;flex-wrap:wrap}.deepmind-wordmark{width:245px}.cactus-wordmark{font-size:25px}.cactus-wordmark img{width:34px}.hackathon-main{grid-template-columns:1fr;gap:28px}.hackathon-result{display:grid;grid-template-columns:110px minmax(0,1fr);gap:5px 22px;padding:24px}.result-label{grid-column:1/-1}.result-rank{grid-column:1;grid-row:2/4;font-size:84px;margin:4px 0}.result-place{grid-column:2;align-self:end;font-size:24px}.result-context{grid-column:2;margin-top:0;align-self:start}.result-mark{right:4px;top:25px}.host-cities{column-gap:22px}.muir-feature{grid-template-columns:1fr;gap:24px}.muir-feature h3{font-size:34px}.muir-copy>.muir-sequence{margin-block:22px}}
 @media(max-width:540px){.hackathon-feature{padding:24px 20px;margin-bottom:32px}.hackathon-topline .project-kicker,.hackathon-topline time{font-size:15px}.organizer-brands{display:grid;grid-template-columns:18px minmax(0,1fr);gap:20px 12px;padding-bottom:26px}.deepmind-wordmark{grid-column:1/-1;width:260px}.brand-times{font-size:26px}.cactus-wordmark{font-size:23px;letter-spacing:-.4px;gap:12px}.cactus-wordmark img{width:31px}.hackathon-main{padding:28px 0;gap:26px}.hackathon-copy h3{font-size:32px;letter-spacing:-.8px;line-height:1.2}.hackathon-copy>p{font-size:18px}.hackathon-copy .hackathon-challenge{font-size:17px}.routing-stack{gap:8px;margin-top:22px}.routing-stack>span{font-size:16px;padding:9px 11px}.routing-stack small{font-size:15px}.hackathon-result{grid-template-columns:82px minmax(0,1fr);gap:6px 14px;padding:20px}.result-label{font-size:13px}.result-rank{font-size:72px;letter-spacing:-5px}.result-place{font-size:22px}.result-place span{font-size:19px}.result-context{font-size:16px;margin-top:2px}.scope-title{font-size:27px;line-height:1.35}.host-cities{gap:10px 20px;margin:20px 0 24px}.host-cities li{font-size:17px}.hackathon-links{gap:12px 22px}.hackathon-links .text-link{min-height:44px}.muir-feature .project-heading .research-mark{width:58px;height:58px;flex:none}.muir-feature .project-kicker{font-size:13px}.muir-feature h3{font-size:32px}}
 @media print{body{background:white;color:#111}.cv-nav,.site-footer{display:none}.cv-document{margin:0;padding:0;border:0;box-shadow:none;max-width:none}.cv-section{margin-top:20px}.cv-entry,.research-skills>div{break-inside:avoid}.cv-section h2{break-after:avoid;color:#222}.cv-title h1{font-size:32px}.cv-entry p,.research-skills dd{color:#333}.cv-contacts a{text-decoration:none}}
+
+/* Undergraduate project rows */
+.undergraduate-projects{margin-top:48px;padding-top:34px;border-top:1px solid #44604e;scroll-margin-top:112px}
+.undergraduate-projects-heading{display:flex;align-items:baseline;justify-content:space-between;gap:16px 30px;margin-bottom:24px}
+.undergraduate-projects-heading h3{font:30px/1.25 var(--serif);letter-spacing:-.4px}
+.undergraduate-projects-heading>p{font:14px/1.6 var(--mono);color:#c2d2c4}
+.undergraduate-project{display:grid;grid-template-columns:210px minmax(0,1fr);gap:36px;padding:30px 0;border-top:1px solid #44604e;scroll-margin-top:112px}
+.undergraduate-project:last-child{padding-bottom:0}
+.undergraduate-project-meta{font-size:15px;line-height:1.65;color:#c2d2c4}
+.undergraduate-project-number{display:block;font:14px/1.5 var(--mono);color:var(--lime);margin-bottom:9px}
+.undergraduate-project-date{font:14px/1.6 var(--mono)}
+.undergraduate-project-role{margin-top:10px;color:#e4eadf;font-size:16px;line-height:1.6}
+.undergraduate-project-role>span{display:block}
+.undergraduate-project-body{min-width:0}
+.undergraduate-project-body h4{margin:0 0 12px;font:28px/1.3 var(--serif);letter-spacing:-.35px;color:var(--paper)}
+.undergraduate-project-body>p{font-size:17px;line-height:1.75;color:#c2d2c4;max-width:880px}
+.undergraduate-project-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 24px;margin-top:16px}
+.undergraduate-project-tags{display:flex;gap:7px;flex-wrap:wrap;list-style:none;padding:0;margin:0}
+.undergraduate-project-tags li{font:13px/1.5 var(--mono);color:#c7d7ba;border:1px solid #536b51;padding:4px 8px;border-radius:2px}
+.undergraduate-project-links{display:flex;flex-wrap:wrap;gap:12px 22px}
+.undergraduate-project-links a{display:inline-flex;align-items:center;gap:9px;min-height:44px;font-size:16px;font-weight:600;color:var(--lime);text-decoration:underline;text-decoration-color:#6e8857;text-underline-offset:6px}
+.undergraduate-project-links a:hover{color:white;text-decoration-color:currentColor}
+.undergraduate-project-links a:focus-visible{outline-color:var(--lime)}
+@media(max-width:780px){.undergraduate-projects{margin-top:38px;padding-top:28px}.undergraduate-projects-heading{align-items:flex-start;flex-direction:column;gap:8px}.undergraduate-project{grid-template-columns:minmax(0,1fr);gap:14px;padding-block:28px}.undergraduate-project-meta{display:flex;align-items:baseline;flex-wrap:wrap;gap:5px 16px}.undergraduate-project-number{margin:0}.undergraduate-project-role{flex-basis:100%;margin:0;font-size:15px}.undergraduate-project-role>span{display:inline}.undergraduate-project-role>span+span::before{content:" · "}.undergraduate-project-body h4{font-size:27px}.undergraduate-project-body>p{font-size:17px}}
+@media(max-width:540px){.undergraduate-projects-heading h3{font-size:28px}.undergraduate-project-body h4{font-size:25px}.undergraduate-project-footer{align-items:flex-start;flex-direction:column;gap:10px}.undergraduate-project-date{font-size:13px}.undergraduate-project-links{gap:10px 22px}}
