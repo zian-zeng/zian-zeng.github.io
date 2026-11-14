@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="research-mark" viewBox="0 0 96 96" style="color:#647b43" role="img" focusable="false"><title>Query chain</title><style>.wash{fill:currentColor;fill-opacity:.1}.solid{fill:currentColor;stroke:none}</style><g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="8" y="13" width="25" height="24" rx="5" class="wash"/>
+      <rect x="36" y="38" width="25" height="24" rx="5"/>
+      <rect x="64" y="63" width="25" height="24" rx="5" class="wash"/>
+      <path d="M33 25h15v9m-5-5 5 5 5-5M61 50h16v9m-5-5 5 5 5-5M16 22h9m-9 7h5M44 46h9m-9 7h5m23 20 4 4 7-8"/>
+    </g></svg>
