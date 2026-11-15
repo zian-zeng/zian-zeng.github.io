@@ -49,7 +49,7 @@
     const query = (search?.value || '').trim().toLocaleLowerCase();
     let count = 0;
     rows.forEach(row => {
-      const match = (category === 'all' || row.dataset.kind === category) && (!topic || row.dataset.topic === topic) && (!query || row.dataset.search.includes(query));
+      const match = (category === 'all' || (category === 'earlier' ? row.dataset.kind === 'publication' : row.dataset.topic === category)) && (!topic || row.dataset.topic === topic) && (!query || row.dataset.search.includes(query));
       row.hidden = !match; if (match) count++;
     });
     document.querySelectorAll('[data-group]').forEach(group => { group.hidden = ![...group.querySelectorAll('[data-paper]')].some(row => !row.hidden); });
@@ -66,16 +66,6 @@
   document.querySelector('[data-atlas-link]')?.addEventListener('click', e => { topic = e.currentTarget.dataset.topic; category = 'all'; search.value = ''; filterPapers(); });
   document.querySelectorAll('a[href="#publications"]:not([data-atlas-link])').forEach(link => link.addEventListener('click', () => { category = 'all'; topic = null; search.value = ''; filterPapers(); }));
   if (rows.length) filterPapers();
-  const dialog = document.querySelector('[data-preprint-dialog]');
-  document.querySelectorAll('[data-preprint]').forEach(button => button.addEventListener('click', () => {
-    document.querySelector('[data-preprint-name]').textContent = button.dataset.preprint;
-    dialog.showModal();
-  }));
-  dialog?.addEventListener('click', e => {
-    if (e.target !== dialog) return;
-    const rect = dialog.getBoundingClientRect();
-    if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) dialog.close();
-  });
   if ('IntersectionObserver' in window) {
     const links = [...document.querySelectorAll('.desktop-nav a[href^="#"]')];
     const observer = new IntersectionObserver(entries => {
