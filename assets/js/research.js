@@ -27,6 +27,7 @@
     tabs.forEach(tab => { const selected = tab.dataset.phase === phase; tab.setAttribute('aria-selected', String(selected)); tab.tabIndex = selected ? 0 : -1; });
     document.querySelector('[data-atlas-question]').textContent = questions[phase][0];
     document.querySelector('[data-atlas-detail]').textContent = questions[phase][1];
+    document.querySelector('[data-atlas-kicker]').textContent = `${String(Object.keys(questions).indexOf(phase) + 1).padStart(2, '0')} / ${questions[phase][2]}`;
     document.querySelector('#atlas-panel').setAttribute('aria-labelledby', `tab-${phase}`);
     document.querySelector('[data-atlas-link]').dataset.topic = phase;
   };
@@ -63,7 +64,14 @@
   filterButtons.forEach(button => button.addEventListener('click', () => { category = button.dataset.filter; filterPapers(); }));
   search?.addEventListener('input', filterPapers);
   document.querySelector('[data-clear-topic]')?.addEventListener('click', () => { topic = null; filterPapers(); });
-  document.querySelector('[data-atlas-link]')?.addEventListener('click', e => { topic = e.currentTarget.dataset.topic; category = 'all'; search.value = ''; filterPapers(); });
+  document.querySelector('[data-atlas-link]')?.addEventListener('click', e => {
+    e.preventDefault();
+    topic = e.currentTarget.dataset.topic; category = 'all'; search.value = ''; filterPapers();
+    const results = document.querySelector('#publication-results');
+    history.replaceState(null, '', '#publication-results');
+    results.focus({ preventScroll: true });
+    results.scrollIntoView({ block: 'start', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+  });
   document.querySelectorAll('a[href="#publications"]:not([data-atlas-link])').forEach(link => link.addEventListener('click', () => { category = 'all'; topic = null; search.value = ''; filterPapers(); }));
   if (rows.length) filterPapers();
   if ('IntersectionObserver' in window) {

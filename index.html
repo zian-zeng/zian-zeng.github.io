@@ -13,9 +13,9 @@
   <meta name="twitter:card" content="summary">
   <link rel="canonical" href="https://zian-zeng.github.io/">
   <link rel="icon" href="favicon.ico">
-  <link rel="stylesheet" href="assets/css/research.css?v=3bdeb55ec1">
+  <link rel="stylesheet" href="assets/css/research.css?v=8e223e44a5">
   <title>Zian Zeng — Reliable AI Agents</title>
-  <script src="assets/js/research.js?v=4431511259" defer></script>
+  <script src="assets/js/research.js?v=6462e88fc2" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -53,27 +53,22 @@
       <div class="section-top"><p class="eyebrow"><span class="section-number">01</span> Research record</p></div>
       <div class="section-heading research-heading"><h2 id="research-title">Publications<span class="name-period">.</span></h2><p class="research-heading-copy">Reliable agents, structured reasoning, and systems built around people.</p><a class="text-link research-cv-link" href="assets/docs/zian-zeng-cv.pdf?v=06518aec57">Full academic CV ↗</a></div>
       <details class="research-map"><summary>Explore my research directions <span>Action · Recovery · Evaluation</span></summary><div class="research-atlas" data-atlas data-phase="act">
-          <div class="atlas-topline"><span class="eyebrow">A map of my research</span><span class="atlas-coordinate" aria-hidden="true">01—06</span></div>
-          <div class="atlas-visual">
-            <svg class="atlas-svg" viewBox="0 0 600 380" role="img" aria-labelledby="atlas-title atlas-desc">
-              <title id="atlas-title">Six manuscripts, three connected research questions</title><desc id="atlas-desc">CallAdmit and RoleFlow address action and coordination; Restoration Is Not Neutrality and Correct Statuses, Wrong Targets address recovery; EffectTwin and The Agent or the World address evaluation.</desc>
-              <defs><radialGradient id="atlas-glow"><stop offset="0" stop-color="#bcd799" stop-opacity=".13"/><stop offset="1" stop-color="#bcd799" stop-opacity="0"/></radialGradient><pattern id="atlas-grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".65" fill="#a3b6a7" opacity=".24"/></pattern></defs>
-              <rect width="600" height="380" fill="url(#atlas-grid)"/>
-              <circle cx="300" cy="188" r="190" fill="url(#atlas-glow)"/>
-              <g class="atlas-orbits" fill="none" stroke="#8aab96"><ellipse cx="300" cy="188" rx="204" ry="133"/><ellipse cx="300" cy="188" rx="156" ry="103"/><circle cx="300" cy="188" r="74"/></g>
-              <g class="atlas-traces" fill="none" stroke-width="1.5"><path class="trace trace-act" d="M300 188 Q233 64 105 82 M300 188 Q209 253 82 230"/><path class="trace trace-recover" d="M300 188 Q371 63 489 82 M300 188 Q415 134 518 230"/><path class="trace trace-evaluate" d="M300 188 Q353 280 435 313 M300 188 Q233 279 164 313"/></g>
-              <g class="atlas-core"><circle cx="300" cy="188" r="64" fill="#183b32" stroke="#b6cc97" stroke-opacity=".7"/><circle class="core-pulse" cx="300" cy="188" r="64" fill="none" stroke="#b6cc97"/><text x="300" y="177" text-anchor="middle">RELIABLE</text><text x="300" y="199" text-anchor="middle">AGENTS</text></g>
-              <g class="atlas-node node-act"><circle cx="105" cy="82" r="6"/><text x="105" y="59" text-anchor="middle">CallAdmit</text></g>
-              <g class="atlas-node node-act"><circle cx="82" cy="230" r="6"/><text x="82" y="259" text-anchor="middle">RoleFlow</text></g>
-              <g class="atlas-node node-recover"><circle cx="489" cy="82" r="6"/><text x="489" y="59" text-anchor="middle">Restoration</text></g>
-              <g class="atlas-node node-recover"><circle cx="518" cy="230" r="6"/><text x="493" y="259" text-anchor="middle">Goal feedback</text></g>
-              <g class="atlas-node node-evaluate"><circle cx="164" cy="313" r="6"/><text x="164" y="341" text-anchor="middle">EffectTwin</text></g>
-              <g class="atlas-node node-evaluate"><circle cx="435" cy="313" r="6"/><text x="435" y="341" text-anchor="middle">Verifier</text></g>
-            </svg>
+          <div class="atlas-topline"><span class="eyebrow">A map of my research</span><span class="atlas-coordinate">6 papers · 3 questions</span></div>
+          <div class="atlas-layout">
+            <div class="atlas-diagram">
+              <div class="atlas-focus"><span>Research focus</span><p>Reliable agents</p></div>
+              <svg class="atlas-branches" viewBox="0 0 600 54" preserveAspectRatio="none" aria-hidden="true"><path class="branch-act" d="M300 0V19Q300 27 292 27H108Q100 27 100 35V54"/><path class="branch-recover" d="M300 0V54"/><path class="branch-evaluate" d="M300 0V19Q300 27 308 27H492Q500 27 500 35V54"/></svg>
+              <div class="atlas-controls" role="tablist" aria-label="Explore research questions">
+                <button id="tab-act" role="tab" aria-selected="true" aria-controls="atlas-panel" data-phase="act"><span class="atlas-card-heading"><small>01</small><span>Act</span></span><span class="atlas-card-papers"><span>CallAdmit</span><span>RoleFlow</span></span></button>
+                <button id="tab-recover" role="tab" aria-selected="false" aria-controls="atlas-panel" tabindex="-1" data-phase="recover"><span class="atlas-card-heading"><small>02</small><span>Recover</span></span><span class="atlas-card-papers"><span>Restoration Is Not Neutrality</span><span>Correct Statuses, Wrong Targets</span></span></button>
+                <button id="tab-evaluate" role="tab" aria-selected="false" aria-controls="atlas-panel" tabindex="-1" data-phase="evaluate"><span class="atlas-card-heading"><small>03</small><span>Evaluate</span></span><span class="atlas-card-papers"><span>EffectTwin</span><span>The Agent or the World?</span></span></button>
+              </div>
+              <p class="atlas-hint">Select a direction to explore the question behind the work.</p>
+            </div>
+            <div class="atlas-panel" id="atlas-panel" role="tabpanel" aria-labelledby="tab-act" tabindex="0"><small data-atlas-kicker>01 / Action & coordination</small><p data-atlas-question>When should an agent act?</p><span data-atlas-detail>Tool-call admission and the structure of multi-agent collaboration.</span><a href="#publication-results" data-atlas-link data-topic="act">Explore this question <span aria-hidden="true">↓</span></a></div>
           </div>
-          <div class="atlas-controls" role="tablist" aria-label="Explore research questions"><button id="tab-act" role="tab" aria-selected="true" aria-controls="atlas-panel" data-phase="act"><small>01</small> Act</button><button id="tab-recover" role="tab" aria-selected="false" aria-controls="atlas-panel" tabindex="-1" data-phase="recover"><small>02</small> Recover</button><button id="tab-evaluate" role="tab" aria-selected="false" aria-controls="atlas-panel" tabindex="-1" data-phase="evaluate"><small>03</small> Evaluate</button></div>
-          <div class="atlas-panel" id="atlas-panel" role="tabpanel" aria-labelledby="tab-act" tabindex="0"><p data-atlas-question>When should an agent act?</p><span data-atlas-detail>Tool-call admission and the structure of multi-agent collaboration.</span><a href="#publications" data-atlas-link data-topic="act">Explore this question <span aria-hidden="true">↗</span></a></div>
         </div></details>
+      <div class="publication-results" id="publication-results" tabindex="-1" role="region" aria-label="Publication results">
       <div class="research-toolbar" data-filters hidden><div class="filter-buttons" role="group" aria-label="Filter publications by research direction"><button data-filter="all" aria-pressed="true">All</button><button data-filter="act" aria-pressed="false">Action</button><button data-filter="recover" aria-pressed="false">Recovery</button><button data-filter="evaluate" aria-pressed="false">Evaluation</button><button data-filter="earlier" aria-pressed="false">Earlier work</button></div><label class="search-box"><span aria-hidden="true">⌕</span><span class="visually-hidden">Search papers by title, author, or topic</span><input type="search" placeholder="Find a paper…" data-paper-search></label></div>
       <div class="active-topic" data-topic-banner hidden><span data-topic-label></span><button data-clear-topic>Clear topic ×</button></div>
       <p class="visually-hidden" role="status" data-results-status></p>
@@ -167,6 +162,7 @@
       <div class="paper-content"><div class="venue-line"><strong class="venue-name">IEEE Big Data <span class="venue-year">2024</span></strong></div><h4 class="paper-title" id="title-coq">Chain-of-Query Prompting for Efficient Small Language Models in Multi-Hop Open-Domain Question Answering</h4><p class="paper-authors">Rithika Akula, Roland Oruche, <strong>Zian Zeng</strong>, Yuanxun Zhang, Marcos Zampieri, Prasad Calyam</p><p class="paper-citation">IEEE International Conference on Big Data 2024, workshop track · Accepted</p><p class="paper-topic">Efficient reasoning</p><details class="paper-focus"><summary>Research focus</summary><p>Using context-aware subqueries for efficient multi-hop question answering.</p></details><div class="paper-side"><a class="paper-action" href="assets/bib/coq.bib" download>Download citation ↓</a></div></div>
     </article></div>
       <p class="empty-state" data-no-results hidden>No matching papers. Try a title, coauthor, or research topic.</p>
+      </div>
 
     </section>
 
