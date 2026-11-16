@@ -163,9 +163,6 @@
 .hero-portrait figcaption{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 12px;margin-top:15px;color:#5e685f;font-size:13px;line-height:1.5}
 .hero-person{margin-top:24px;padding-top:18px}.hero-person span{max-width:none}
 .research-section .section-heading h2{font-size:clamp(42px,5.3vw,66px);letter-spacing:-2px}
-.research-map{margin:0 0 27px;border-block:1px solid var(--line);padding:15px 0}
-.research-map>summary{cursor:pointer;font-size:17px;font-weight:600;color:var(--forest);padding:4px 0}
-.research-map>summary>span{font-size:14px;color:#687367;font-weight:400;margin-left:14px}
 
 .research-toolbar{gap:15px}.filter-buttons{flex-wrap:wrap}.filter-buttons button{padding-inline:12px}
 .paper-citation{font-size:15px;line-height:1.65;color:#697269;margin-top:7px;max-width:950px}
@@ -174,7 +171,7 @@
 .cv-paper h3{font-size:22px;line-height:1.4}.cv-paper .cv-entry-meta{font-size:15px;line-height:1.65;color:#697269}
 @media(max-width:1100px){.hero-grid{gap:38px}.hero-portrait{max-width:350px}.hero-copy h1{font-size:82px;letter-spacing:-4px}}
 @media(max-width:780px){.hero-grid{grid-template-columns:minmax(0,1fr) 235px;gap:25px}.hero-copy h1{font-size:66px;letter-spacing:-3px}.hero-thesis{font-size:29px}.hero-bio{font-size:17px}.hero-portrait{align-self:start;margin-top:20px}.hero-portrait figcaption{font-size:12px}.hero-actions{gap:10px}.hero-person p,.hero-person span{font-size:15px}.paper-title{font-size:22px}}
-@media(max-width:620px){.hero-grid{grid-template-columns:1fr;gap:8px}.hero-portrait{grid-row:1;justify-self:start;width:200px;margin:4px 0 20px}.hero-portrait figcaption{display:none}.hero-copy{padding-top:0}.hero-copy h1{font-size:66px;letter-spacing:-3px;margin-bottom:16px}.hero-thesis{font-size:31px}.hero-bio{font-size:18px;margin-top:20px}.hero-person{margin-top:20px;padding-top:16px}.hero-footnote{margin-top:18px}.research-map>summary>span{display:block;margin-left:0;margin-top:5px}.research-toolbar{align-items:stretch}.filter-buttons{justify-content:flex-start;gap:4px;width:100%}.filter-buttons button{font-size:14px;padding:8px 10px}.search-box{max-width:none;width:100%}.search-box input{width:100%}.paper-title{font-size:21px}.paper-citation{font-size:14px}.paper-authors{font-size:16px}}
+@media(max-width:620px){.hero-grid{grid-template-columns:1fr;gap:8px}.hero-portrait{grid-row:1;justify-self:start;width:200px;margin:4px 0 20px}.hero-portrait figcaption{display:none}.hero-copy{padding-top:0}.hero-copy h1{font-size:66px;letter-spacing:-3px;margin-bottom:16px}.hero-thesis{font-size:31px}.hero-bio{font-size:18px;margin-top:20px}.hero-person{margin-top:20px;padding-top:16px}.hero-footnote{margin-top:18px}.research-toolbar{align-items:stretch}.filter-buttons{justify-content:flex-start;gap:4px;width:100%}.filter-buttons button{font-size:14px;padding:8px 10px}.search-box{max-width:none;width:100%}.search-box input{width:100%}.paper-title{font-size:21px}.paper-citation{font-size:14px}.paper-authors{font-size:16px}}
 
 /* Underlined venue labels align with the paper titles. */
 @font-face{font-family:"Source Serif 4";font-style:normal;font-weight:600;font-display:swap;src:url("../fonts/source-serif-4-semibold.ttf") format("truetype")}
@@ -1220,3 +1217,112 @@
   .rm-atlas .rm-tab::after { height: 1px; background: CanvasText; }
   .rm-atlas .rm-tab::before { background: CanvasText; }
 }
+
+/* ------------------------------------------------------------------ modifier: on a dark band (.rm-atlas--band) */
+/* The chart set directly on a dark page band (the site's "01 Research map" section) instead of in its own card. The
+   card goes (border, radius, fill, shadow, inset rule; overflow becomes visible, so focus rings at the chart's edges
+   are not clipped). The chart's own title steps aside, because the band's heading names the chart. Its outer text
+   lines up with the page's shell: the margin column's notes, the earlier-publications note and the panel lose their
+   outer padding. Below 940px, where the sky column starts at the top of the chart (the title row is gone), the sky
+   keeps 22px clear of the band's hairline. Nothing inside the sky changes, and without the modifier the chart
+   renders exactly as before. */
+.rm-atlas.rm-atlas--band { margin-top: 0; }
+.rm-atlas.rm-atlas--band .rm-frame { border: 0; border-radius: 0; background: none; box-shadow: none; overflow: visible; }
+.rm-atlas.rm-atlas--band .rm-frame::before { display: none; }
+.rm-atlas.rm-atlas--band .rm-head { display: none; }
+.rm-atlas.rm-atlas--band .rm-earlier { margin-left: 0; }
+.rm-atlas.rm-atlas--band .rm-panel { padding-right: 0; }
+@container (width >= 940px) {
+  .rm-atlas.rm-atlas--band .rm-lens { padding-left: 0; }
+}
+@container (width < 940px) {
+  .rm-atlas.rm-atlas--band .rm-chart { padding-top: 22px; }
+}
+@container (width < 656px) {
+  .rm-atlas.rm-atlas--band .rm-panel { padding-left: 0; }
+}
+
+/* >>> Research map band (section level). The star chart as section 01, a full-bleed night chapter between the hero
+   and Publications, in the grammar of "Selected builds": an eyebrow with a lime number, a serif heading with a lime
+   italic em, one line of copy, a hairline. The chart sits on the band without its card (.rm-atlas--band, in the
+   chart's own CSS above). The band's sky (band/starfield.html, aria-hidden, static) is dim dust everywhere plus
+   brighter stars kept to strips that never hold text: the top and bottom padding (--map-pt, --map-pb) and the
+   gutters outside the shell (--map-gut). */
+.map-section{--map-pt:76px;--map-pb:84px;--map-gut:calc((100% - min(var(--shell),100% - 96px))/2);--map-glow-at:45% 60%;--map-glow:620px 470px;position:relative;isolation:isolate;overflow:hidden;color:var(--paper);background:radial-gradient(ellipse var(--map-glow) at var(--map-glow-at),#174334a6 0%,#1743345c 42%,#17433400 100%),linear-gradient(32deg,#cee5a700 34%,#cee5a708 44%,#e8f0dc0c 50%,#cee5a708 56%,#cee5a700 66%),linear-gradient(180deg,#0e2e25 0%,#0b261f 46%,#0a221c 100%);scroll-margin-top:-14px}
+.map-sky{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.map-sky svg{position:absolute;overflow:visible;max-width:none}
+.map-sky circle{fill:#e8f0dc}
+.map-sky .map-sky__halo{fill:#cee5a7;opacity:.08}
+.map-sky .map-sky__core{opacity:.86}
+.map-sky__dust{inset:0;width:100%;height:100%}
+.map-sky__zone--top{top:0;left:0;width:100%;height:calc(var(--map-pt) - 18px)}
+.map-sky__zone--bottom{bottom:0;left:0;width:100%;height:calc(var(--map-pb) - 18px)}
+.map-sky__zone--left,.map-sky__zone--right{top:var(--map-pt);width:calc(var(--map-gut) - 4px);height:calc(100% - var(--map-pt) - var(--map-pb))}
+.map-sky__zone--left{left:0}.map-sky__zone--right{right:0}
+.map-section .section{padding-block:var(--map-pt) var(--map-pb)}
+.map-section .section-top{min-height:21px;color:#c9d5c4;margin-bottom:26px}
+.map-section .section-number{color:var(--lime)}
+/* the way straight to the papers: a quiet link at the end of the section's top row, where About keeps "Read my CV";
+   its line box matches the eyebrow's, so the row keeps the eyebrow's height */
+.map-section .map-all{font-weight:500;line-height:17px;color:#c9d5c4;border-color:#cee5a74d;padding-bottom:3px;white-space:nowrap}
+.map-section .map-all:hover{color:var(--paper);border-color:currentColor}
+.map-section .map-all:focus-visible{outline:2px solid var(--lime);outline-offset:4px}
+.map-section .map-heading{grid-template-columns:minmax(0,1fr) minmax(0,420px);column-gap:64px;row-gap:16px;align-items:end;margin-bottom:0;padding-bottom:30px;border-bottom:1px solid #cee5a726}
+.map-section .map-heading h2{justify-self:start;font:52px/1.08 var(--serif);letter-spacing:-2px;text-wrap:balance}
+.map-section .map-heading h2 em{color:var(--lime)}
+/* the heading takes focus when the visitor arrives at the band (band.js); a pointer arrival shows no ring */
+.map-section .map-heading h2:focus{outline:0}
+.map-section .map-heading h2:focus-visible{outline:2px solid var(--lime);outline-offset:6px;border-radius:2px}
+.map-section .map-heading h2[data-map-quiet]:focus-visible{outline:0}
+.map-section .map-heading>p{max-width:420px;padding-bottom:4px;color:#b5c5b7;text-wrap:balance}
+/* Publications follows the band, so a jump to it (the nav, the phone menu, "All publications") lands it flush under
+   the sticky header, as the band itself lands: html's scroll-padding-top (96px) would leave a strip of the night band
+   under the header (13px, or 27px under the 68px phone header). The section's own top padding spaces its eyebrow. */
+.map-section+#publications{scroll-margin-top:-14px}
+/* Publications, when it was opened from the chart: a way back up to the chart. The button loses its UA side padding,
+   so when the two stack (narrow phones) "Clear topic" lines up with the link and the label; the row gap grows by the
+   same 6px, so side by side they sit as before. */
+.active-topic{flex-wrap:wrap;gap:6px 18px}
+.active-topic__actions{display:flex;flex-wrap:wrap;align-items:center;gap:6px 28px}
+.active-topic__actions button{padding-inline:0}
+.active-topic .topic-back{font-size:16px;text-decoration:underline;text-decoration-color:#7f9a6f;text-underline-offset:3px}
+.active-topic .topic-back:hover{text-decoration-color:currentColor}
+@media(max-width:1100px){.map-section{--map-gut:32px}.map-section .map-heading{grid-template-columns:minmax(0,1fr) minmax(0,380px);column-gap:48px}}
+/* below 861 the left column would be under 350px and "Three questions," would break: one column, heading then copy */
+@media(max-width:860px){.map-section .map-heading{grid-template-columns:minmax(0,1fr)}.map-section .map-heading>p{max-width:560px}}
+@media(max-width:780px){.map-section{--map-pt:58px;--map-pb:64px;--map-gut:22px;scroll-margin-top:-28px}.map-section+#publications{scroll-margin-top:-28px}.map-section .section-top{margin-bottom:22px}.map-section .map-heading{padding-bottom:26px}.map-section .map-heading h2{font-size:46px}}
+@media(max-width:700px){.map-section{--map-glow-at:50% 40%;--map-glow:330px 360px}}
+/* phones: shorter star strips and a tighter head, so Publications arrives sooner; the chart itself is unchanged */
+@media(max-width:540px){.map-section{--map-pt:40px;--map-pb:44px}.map-section .section-top{margin-bottom:16px}.map-section .map-heading{row-gap:12px;padding-bottom:20px}.map-section .map-heading h2{font-size:42px}}
+@media(max-width:360px){.map-section .map-heading h2{font-size:38px;letter-spacing:-1.5px}}
+/* Short screens. The hero's button (and "Back to the chart") must land with the whole sky and the panel in view under
+   the sticky header. Up to 860px tall the head tightens: a shorter top strip, closer rows, a slightly smaller copy
+   line, and on 861-1100px wide screens a heading that keeps to one line (1024x768 then lands flush). Where even that
+   head does not fit above the chart, the arrival steps past the top strip, so the eyebrow row sits 10px under the
+   header (1366x768); on the shortest screens it also steps past the eyebrow row and lands with the heading 12px
+   under the header (1280x720). Only the section's spacing changes, never the chart's.
+   The offsets: html scroll-padding-top is 96px and the header ends at 82px, so a margin of -(4px + top strip) puts
+   the eyebrow row at 92px, and -(41px + top strip), past the 21px row and its 18px gap, puts the heading at 94px. */
+@media(min-width:781px) and (max-height:860px){.map-section{--map-pt:44px}.map-section .section-top{margin-bottom:18px}.map-section .map-heading{padding-bottom:22px}.map-section .map-heading>p{font-size:17px;line-height:1.55}}
+@media(min-width:861px) and (max-width:1100px) and (max-height:860px){.map-section .map-heading h2{font-size:48px}}
+@media(min-width:1101px) and (max-height:798px),(min-width:861px) and (max-width:1100px) and (max-height:740px){.map-section{scroll-margin-top:calc(-4px - var(--map-pt))}}
+@media(min-width:1101px) and (max-height:764px),(min-width:861px) and (max-width:1100px) and (max-height:700px){.map-section{scroll-margin-top:calc(-41px - var(--map-pt))}.map-section .map-heading{padding-bottom:16px}.map-section .map-heading h2{font-size:48px}.map-section .map-heading>p{font-size:16px;line-height:1.5}}
+/* Shorter still, the head and the whole chart cannot both fit under the header: browser windows on laptops, such as
+   1366x657 (a 1366x768 screen in Chrome) or 1280x600 (a 1080p screen at 150%), and 1000-1100px-wide windows under
+   650px. There the arrival lands on the chart: the head's hairline sits 8px under the header, and the sky, the margin
+   notes and the panel follow whole; the heading is just above, a short scroll away. Where the chart is taller, on
+   861-999px-wide windows (it stacks its panel under a 470px sky), this applies under 800px. The head keeps the
+   compact sizes above, so the offset is exact: the hairline lies the top strip + 21px row + 18px gap + 52px heading
+   row + 16px below the band's top, and 96 - (112px + top strip) + that = 91px. At 861-1100px the heading's column
+   would hold "Three questions, one loop." with no room to spare (it breaks under 999px), so there the head takes the
+   single column of narrower screens, heading over copy, the copy kept to the 420px measure of wide screens so it
+   always sets in two lines (a 120px row; 96 - (180px + top strip) + 175px = 91px).
+   band.js reads --map-arrive: a keyboard arrival there starts on the chart's selected tab, since the heading is out
+   of view. */
+@media(min-width:1101px) and (max-height:710px),(min-width:861px) and (max-width:1100px) and (max-height:649px),(min-width:861px) and (max-width:999px) and (max-height:799px){.map-section{--map-arrive:chart;scroll-margin-top:calc(-112px - var(--map-pt))}.map-section .map-heading{padding-bottom:16px}.map-section .map-heading h2{font-size:48px}.map-section .map-heading>p{font-size:16px;line-height:1.5}}
+@media(min-width:861px) and (max-width:1100px) and (max-height:649px),(min-width:861px) and (max-width:999px) and (max-height:799px){.map-section{scroll-margin-top:calc(-180px - var(--map-pt))}.map-section .map-heading{grid-template-columns:minmax(0,1fr)}.map-section .map-heading>p{max-width:420px}}
+/* Print: the band keeps its night ground and the chart its own colours, so its light text never prints pale on white,
+   and it starts on a page of its own rather than splitting its heading across two */
+@media print{.map-section{print-color-adjust:exact;-webkit-print-color-adjust:exact;break-inside:avoid}}
+@media(forced-colors:active){.map-sky{display:none}}
+/* <<< Research map band */

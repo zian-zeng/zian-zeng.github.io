@@ -77,12 +77,18 @@
   if (rows.length) filterPapers();
   if ('IntersectionObserver' in window) {
     const links = [...document.querySelectorAll('.desktop-nav a[href^="#"]')];
+    /* >>> research-map band: the spy keeps every section that holds the reading line, and the last of them in page
+       order is current. The hero and the band have no nav entry, so while either is that section no entry is
+       current. Working from the whole set, not from the entry that just arrived, keeps a reload at a boundary right. */
+    const reading = new Set();
     const observer = new IntersectionObserver(entries => {
-      for (const entry of entries) if (entry.isIntersecting) {
-        links.forEach(link => { if (link.hash === `#${entry.target.id}`) link.setAttribute('aria-current', 'location'); else link.removeAttribute('aria-current'); });
-      }
+      for (const entry of entries) if (entry.isIntersecting) reading.add(entry.target); else reading.delete(entry.target);
+      const at = [...reading].reduce((a, b) => (a && b.compareDocumentPosition(a) & Node.DOCUMENT_POSITION_FOLLOWING ? a : b), null);
+      if (at) links.forEach(link => { if (link.hash === `#${at.id}`) link.setAttribute('aria-current', 'location'); else link.removeAttribute('aria-current'); });
     }, { rootMargin: '-15% 0px -65% 0px' });
     links.forEach(link => { const target = document.querySelector(link.hash); if (target) observer.observe(target); });
+    ['#top', '#research-map'].forEach(id => { const el = document.querySelector(id); if (el) observer.observe(el); });
+    /* <<< research-map band */
   }
 })();
 
@@ -647,11 +653,125 @@
     reduce.addEventListener('change', () => { if (reduce.matches) { clearEntrance(); stillOneOffs(); px = 0; py = 0; queue(); } });
   }
   sync();
-  /* a map that is already open when the page loads (the prototypes) plays the entrance only if it is in view */
-  if (isOpen() && canEnter()) {
+  /* A chart without <details> (the site's research-map band, .rm-atlas--band) is always open. Its entrance start
+     state (the empty ring, the untraced figure, the comet waiting) is set now, while the chart is still below the
+     fold, and the draw plays the first time at least 55% of the sky is in view under the sticky header. A chart that
+     is already on screen when this runs stays static (its finished frame may have been painted), and so does every
+     chart under reduced motion, in forced colours or paused. So does a chart whose window cannot show 60% of the sky
+     under the header (a phone on its side, a laptop at 200% zoom): it could never be mostly in view. Touching,
+     clicking, focusing or typing in the chart before the draw starts, printing the page, or a resize that leaves too
+     little room for the sky drops the start state. Nothing is observed or listened to after that. A chart inside
+     <details> keeps its own path (the else branch), unchanged. */
+  if (!details) {
+    const skyEl = sky || root;
+    const room = () => window.innerHeight - headerBottom();
+    const onScreen = () => {
+      const r = skyEl.getBoundingClientRect();
+      return r.width > 0 && r.bottom > headerBottom() && r.top < window.innerHeight;
+    };
+    const roomy = () => {
+      const h = skyEl.getBoundingClientRect().height;
+      return h > 0 && room() >= 0.6 * h;
+    };
+    if (canEnter() && 'IntersectionObserver' in window && !onScreen() && roomy()) {
+      let io = null;
+      let e = null;
+      const kinds = ['pointerdown', 'keydown', 'focusin'];
+      const stop = () => {
+        if (io) { io.disconnect(); io = null; }
+        kinds.forEach(type => root.removeEventListener(type, drop, true));
+        window.removeEventListener('beforeprint', drop);
+        window.removeEventListener('resize', shrink);
+      };
+      function drop() {
+        stop();
+        if (e && entrance === e && !e.started) clearEntrance();
+      }
+      function shrink() {
+        if (!roomy()) drop();
+      }
+      /* The share of the sky that starts the draw: 55%, or, should the window hold less than 0.55/0.9 of the sky,
+         the largest 5% step under 90% of what it holds. It is one of the observer's thresholds, so it is always
+         reachable and always reported. */
+      const steps = Array.from({ length: 12 }, (_, i) => i / 20);
+      const need = () => {
+        const h = skyEl.getBoundingClientRect().height;
+        const reach = h > 0 ? Math.min(1, room() / h) : 0;
+        return Math.max(1, Math.min(11, Math.floor(reach * 0.9 * 20))) / 20;
+      };
+      try {
+        prepareEntrance();
+        e = entrance;
+        /* the start state waits for the scroll, not for a toggle (prepareEntrance's 900ms guard is for a summary click) */
+        clearTimeout(e.timer);
+        e.timer = 0;
+        io = new IntersectionObserver(entries => {
+          const en = entries[entries.length - 1];
+          if (entrance !== e || e.started) { drop(); return; }
+          if (en.isIntersecting && en.intersectionRatio >= need()) { stop(); startEntrance(); }
+        }, { threshold: steps, rootMargin: '-' + Math.round(headerBottom()) + 'px 0px 0px 0px' });
+        io.observe(skyEl);
+        kinds.forEach(type => root.addEventListener(type, drop, true));
+        window.addEventListener('beforeprint', drop);
+        window.addEventListener('resize', shrink, { passive: true });
+      } catch (err) {
+        stop();
+        clearEntrance();
+      }
+    }
+  } else if (isOpen() && canEnter()) {
+    /* a map that is already open when the page loads (the prototypes) plays the entrance only if it is in view */
     const r = root.getBoundingClientRect();
     if (r.top < window.innerHeight - 100 && r.bottom > 100) {
       try { prepareEntrance(); startEntrance(); } catch (err) { clearEntrance(); }
     }
+  }
+})();
+
+// Research map band
+(() => {
+  'use strict';
+  /* Arrival. The hero's "Explore my research", the topic banner's "Back to the chart" and any other #research-map
+     link or address bring the visitor to the band; focus then moves to the band's heading (h2#map-title,
+     tabindex="-1"), so keyboard and screen-reader users start in front of the chart, where the page now shows them.
+     The browser's own scroll is kept (preventScroll), and a pointer arrival shows no ring (band.css, :focus-visible).
+     The heading sits outside the chart, so the chart's entrance still plays on arrival. Focus that is already inside
+     the band is left where it is. A page opened at #research-map has had no input yet, so the browser would draw the
+     ring there too; that arrival is marked quiet and shows none. On short windows the arrival lands on the chart and
+     the heading is out of view (band.css sets --map-arrive: chart there); a keyboard arrival, the one that shows a
+     ring, then moves on to the chart's selected tab, so the ring is never hidden under the header. A pointer arrival
+     keeps the heading, which shows no ring and leaves the chart's entrance to play. */
+  const band = document.getElementById('research-map');
+  const title = document.getElementById('map-title');
+  if (!band || !title) return;
+  const keyed = () => {
+    try { return title.matches(':focus-visible'); } catch (err) { return false; }
+  };
+  const land = quiet => {
+    const active = document.activeElement;
+    if (active && active !== title && band.contains(active)) return;
+    if (quiet === true) title.setAttribute('data-map-quiet', '');
+    try { title.focus({ preventScroll: true }); } catch (err) { return; }
+    if (quiet === true || getComputedStyle(band).getPropertyValue('--map-arrive').trim() !== 'chart' || !keyed()) return;
+    const tab = band.querySelector('[role="tab"][aria-selected="true"]');
+    if (tab) try { tab.focus({ preventScroll: true }); } catch (err) { /* the heading keeps focus */ }
+  };
+  title.addEventListener('blur', () => title.removeAttribute('data-map-quiet'));
+  document.addEventListener('click', e => {
+    const link = e.target && e.target.closest ? e.target.closest('a[href="#research-map"]') : null;
+    if (!link || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    /* after the browser's own fragment navigation, which follows this click's dispatch */
+    setTimeout(land, 0);
+  });
+  window.addEventListener('hashchange', () => { if (location.hash === '#research-map') land(); });
+  /* a reload or a history step restores the visitor's own scroll position instead; focus stays where the browser puts it */
+  const nav = performance.getEntriesByType ? performance.getEntriesByType('navigation')[0] : null;
+  if (location.hash === '#research-map' && !(nav && nav.type && nav.type !== 'navigate')) {
+    const onLoad = () => setTimeout(() => {
+      const active = document.activeElement;
+      if (location.hash === '#research-map' && (!active || active === document.body)) land(true);
+    }, 0);
+    if (document.readyState === 'complete') onLoad();
+    else window.addEventListener('load', onLoad, { once: true });
   }
 })();
