@@ -188,6 +188,15 @@
 .research-heading .research-cv-link:hover{color:#12372d;border-color:currentColor}
 @media(max-width:900px){.research-section .research-heading{grid-template-columns:minmax(0,1fr);row-gap:16px}.research-heading .research-cv-link{justify-self:start}}
 
+/* About: a pull-quote (Aristotle) between the bio and the profile links. */
+.about-quote{margin:34px 0 0;padding:3px 0 3px 22px;border-left:2px solid #a7b77f}
+.about-quote blockquote{margin:0}
+.about-quote blockquote p{font:italic 22px/1.5 var(--serif);color:var(--ink);letter-spacing:-.2px}
+.about-quote figcaption{margin-top:12px;font-size:15px;line-height:1.6;color:var(--muted)}
+.about-quote figcaption span{display:block}
+@media(max-width:780px){.about-quote blockquote p{font-size:20px}}
+@media(max-width:540px){.about-quote{margin-top:28px;padding-left:18px}.about-quote blockquote p{font-size:19px}}
+
 /* Research map: one focus, three selectable directions, six connected papers. */
 
 .publication-results{scroll-margin-top:12px}
