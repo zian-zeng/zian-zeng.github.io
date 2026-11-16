@@ -194,7 +194,9 @@
 .about-quote blockquote p{font:italic 22px/1.5 var(--serif);color:var(--ink);letter-spacing:-.2px}
 .about-quote figcaption{margin-top:12px;font-size:15px;line-height:1.6;color:var(--muted)}
 .about-quote figcaption span{display:block}
-.hero-epigraph__verse span{display:block;padding-left:1.1em;text-indent:-1.1em}
+.about-quote__verse span{display:block;padding-left:1.1em;text-indent:-1.1em}
+.about-quote__verse span:first-child{text-indent:-1.52em} /* hang the opening quote mark so the verse lines align */
+.about-quote figcaption span+span{margin-top:6px;max-width:34em}
 @media(max-width:780px){.about-quote blockquote p{font-size:20px}}
 @media(max-width:540px){.about-quote{margin-top:28px;padding-left:18px}.about-quote blockquote p{font-size:19px}}
 
