@@ -200,8 +200,9 @@
 @media(max-width:780px){.about-quote blockquote p{font-size:20px}}
 @media(max-width:540px){.about-quote{margin-top:28px;padding-left:18px}.about-quote blockquote p{font-size:19px}}
 
-/* Hero: the portrait runs from the top of the name to the divider line; an epigraph sits under it, level with the
-   degree line. The divider row (.hero-person) is its own grid row, so the alignment holds at every width and font. */
+/* Hero: the portrait runs from the top of the content area (just under the eyebrow row) to the divider line, so it
+   leads the name; an epigraph sits under it, level with the degree line. The divider row (.hero-person) is its own
+   grid row, so the alignment holds at every width and font. */
 .hero-epigraph{margin:0;color:var(--ink)}
 .hero-epigraph p{font:italic 17px/1.55 var(--serif);letter-spacing:-.1px}
 .hero-epigraph footer{margin-top:6px;font-size:13px;line-height:1.5;color:#5e685f}
@@ -215,12 +216,11 @@
   .hero-grid{align-items:start}
   .hero-copy{padding-bottom:0}
   .hero-person{padding-bottom:26px}
-  .hero-portrait{--hero-fs:clamp(64px,7.2vw,100px);align-self:stretch;display:flex;flex-direction:column;padding-top:calc(16px + .16 * var(--hero-fs));margin-bottom:-24px}
+  .hero-portrait{align-self:stretch;display:flex;flex-direction:column;margin-bottom:-24px}
   .hero-portrait>img{flex:1 1 0;min-height:0;height:auto;aspect-ratio:auto}
   .hero-epigraph{grid-column:2;grid-row:2;justify-self:end;width:min(100%,400px);padding-top:43px}
 }
-@media(min-width:1600px){.hero-portrait{--hero-fs:108px}}
-@media(min-width:781px) and (max-width:1100px){.hero-portrait{--hero-fs:82px}.hero-epigraph{width:min(100%,350px)}}
+@media(min-width:781px) and (max-width:1100px){.hero-epigraph{width:min(100%,350px)}}
 @media(max-width:780px){.hero-epigraph{grid-column:1/-1;grid-row:auto;margin-top:24px;max-width:560px}.hero-epigraph p{font-size:16px}}
 
 /* Research map: one focus, three selectable directions, six connected papers. */
