@@ -775,3 +775,18 @@
     else window.addEventListener('load', onLoad, { once: true });
   }
 })();
+
+// Floating "back to top": shown once the hero has scrolled out of view, hidden again at the footer (which has its own
+// "Back to top" link). Without IntersectionObserver it simply stays hidden and the footer link remains.
+(() => {
+  'use strict';
+  const button = document.querySelector('.to-top');
+  const hero = document.querySelector('.hero');
+  const footer = document.querySelector('.site-footer');
+  if (!button || !hero || !('IntersectionObserver' in window)) return;
+  let heroInView = true;
+  let footerInView = false;
+  const update = () => button.classList.toggle('is-visible', !heroInView && !footerInView);
+  new IntersectionObserver(([entry]) => { heroInView = entry.isIntersecting; update(); }).observe(hero);
+  if (footer) new IntersectionObserver(([entry]) => { footerInView = entry.isIntersecting; update(); }).observe(footer);
+})();

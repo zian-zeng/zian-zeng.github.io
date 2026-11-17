@@ -243,7 +243,7 @@
    and the contact band (one seamless grey tile, hard-light blended onto each band's own colour); morning sun with the
    shadow of a palm at the top of Publications and late sun with an olive sprig near its end (multiply light maps);
    oil-paint brushwork across the top of the green band; a palm frond lying under the portrait; and the soft shadow of a
-   palm on the contact band. All decorative: behind the content, never clickable, and off in forced colours and print. */
+   palm on the contact band; brush-painted bamboo in the green band's side margins on wide screens, and a dry-brush swash under its two lower headings. All decorative: behind the content, never clickable, and off in forced colours and print. */
 #main{overflow-x:hidden;overflow-x:clip}
 .hero{position:relative}
 .hero::before{content:"";position:absolute;top:0;bottom:0;left:calc(50% - 50vw);right:calc(50% - 50vw);z-index:-1;pointer-events:none;background:url(../media/texture/paper.webp) 0 0/600px,var(--paper);background-blend-mode:hard-light;opacity:.2}
@@ -265,11 +265,23 @@
 .hero-portrait::before{content:"";position:absolute;z-index:-1;pointer-events:none;top:3%;right:14%;width:160%;aspect-ratio:1000/760;background:url(../media/texture/palm-frond.svg) 0 0/100% 100% no-repeat}
 @media(max-width:1280px){.hero-portrait::before{width:135%}}
 @media(max-width:1199px){.hero-portrait::before{width:120%}}
+@media(min-width:1440px){.work-section::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:url(../media/texture/bamboo-left.webp) left 0 top 1000px/640px auto no-repeat,url(../media/texture/bamboo-right.webp) right 0 top 1170px/640px auto no-repeat;--clear:calc(var(--shell) / 2 + 14px);--fade:calc(var(--shell) / 2 + 150px);-webkit-mask-image:linear-gradient(90deg,#000 calc(50% - var(--fade)),transparent calc(50% - var(--clear)),transparent calc(50% + var(--clear)),#000 calc(50% + var(--fade)));mask-image:linear-gradient(90deg,#000 calc(50% - var(--fade)),transparent calc(50% - var(--clear)),transparent calc(50% + var(--clear)),#000 calc(50% + var(--fade)))}}
+.muir-feature h3,.undergraduate-projects-heading h3{position:relative;width:fit-content}
+.muir-feature h3::before,.undergraduate-projects-heading h3::before{content:"";position:absolute;z-index:-1;pointer-events:none;left:-.45em;bottom:0;width:calc(100% + 1.1em);aspect-ratio:620/120;background:url(../media/texture/swash.webp) 0 50%/100% 100% no-repeat;opacity:.62;transform:translateY(calc(47% - .2em))}
+.to-top{position:fixed;right:max(24px,env(safe-area-inset-right));bottom:max(24px,env(safe-area-inset-bottom));z-index:20;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:#173f33;color:var(--paper);border:1px solid #cee5a78c;box-shadow:0 12px 26px -12px #0b261fd9,0 2px 6px -2px #0b261f59;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .25s ease,transform .25s ease,visibility 0s linear .25s,background-color .2s ease}
+.to-top.is-visible{opacity:1;visibility:visible;transform:none;transition:opacity .25s ease,transform .25s ease,visibility 0s,background-color .2s ease}
+.to-top:hover{background:#1f4d3f}
+.to-top:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+.to-top svg{width:22px;height:22px}
+@media(max-width:780px){.to-top{width:44px;height:44px;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom))}}
+@media(prefers-reduced-motion:reduce){.to-top,.to-top.is-visible{transform:none;transition:opacity .01s,visibility 0s}}
+@media(forced-colors:active){.to-top{border-color:ButtonText;background:ButtonFace;color:ButtonText}}
 @media(min-width:621px) and (max-width:1100px){.hero-portrait::before{display:none}}
 @media(max-width:1100px){.contact-section::after{display:none}}
 @media(max-width:780px){.work-section::before{height:min(760px,100%)}}
 @media(max-width:620px){.hero-portrait::before{right:auto;left:6%;width:min(150%,calc(100vw - 48px));transform:scaleX(-1)}}
-@media(forced-colors:active),print{.hero::before,.research-section::before,.about-section::before,.contact-section::before,.contact-section::after,.work-section::before,.hero-portrait::before{display:none}}
+@media(forced-colors:active),print{.hero::before,.research-section::before,.about-section::before,.contact-section::before,.contact-section::after,.work-section::before,.work-section::after,.muir-feature h3::before,.undergraduate-projects-heading h3::before,.hero-portrait::before{display:none}}
+@media print{.to-top{display:none}}
 
 /* Research map: one focus, three selectable directions, six connected papers. */
 
