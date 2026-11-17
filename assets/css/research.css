@@ -239,18 +239,29 @@
 @media(min-width:781px) and (max-width:1100px){.hero-epigraph{width:min(100%,350px)}}
 @media(max-width:780px){.hero-epigraph{grid-column:1/-1;grid-row:auto;margin-top:24px;max-width:560px}.hero-epigraph p{font-size:16px}}
 
-/* Paper, paint and palm (homepage only). The light logo set's paper across the hero and the contact band (one
-   seamless grey tile, hard-light blended onto the band's own colour), oil-paint brushwork across the top of the green
-   band, a palm frond lying under the portrait, and the soft shadow of a palm falling across the contact band. All
-   decorative: behind the content, never clickable, and off in forced colours and print. */
+/* Paper, paint, palm and sunlight (homepage only). The light logo set's paper across the hero, Publications, About
+   and the contact band (one seamless grey tile, hard-light blended onto each band's own colour); morning sun with the
+   shadow of a palm at the top of Publications and late sun with an olive sprig near its end (multiply light maps);
+   oil-paint brushwork across the top of the green band; a palm frond lying under the portrait; and the soft shadow of a
+   palm on the contact band. All decorative: behind the content, never clickable, and off in forced colours and print. */
 #main{overflow-x:hidden;overflow-x:clip}
 .hero{position:relative}
 .hero::before{content:"";position:absolute;top:0;bottom:0;left:calc(50% - 50vw);right:calc(50% - 50vw);z-index:-1;pointer-events:none;background:url(../media/texture/paper.webp) 0 0/600px,var(--paper);background-blend-mode:hard-light;opacity:.2}
-.contact-section{position:relative;isolation:isolate}
+.contact-section{position:relative;isolation:isolate;background-image:radial-gradient(ellipse 48% 105% at 82% 20%,#fff6dea6,#fff6de00 72%)}
 .contact-section::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:url(../media/texture/paper.webp) 0 0/600px,#e6e9dc;background-blend-mode:hard-light;opacity:.22}
 .contact-section::after{content:"";position:absolute;top:0;right:0;bottom:0;width:min(860px,100%);z-index:-1;pointer-events:none;background:url(../media/texture/palm-shadow.svg) 100% 0/min(860px,130vw) auto no-repeat;mix-blend-mode:multiply;opacity:.15}
 .work-section{position:relative;isolation:isolate}
 .work-section::before{content:"";position:absolute;top:0;left:0;right:0;height:min(1100px,100%);z-index:-1;pointer-events:none;background:linear-gradient(#12372dd9,#12372d8c 120px,#12372d00 280px),url(../media/texture/paint.webp) 50% 0/cover no-repeat;opacity:.9;-webkit-mask-image:linear-gradient(#000 40%,transparent);mask-image:linear-gradient(#000 40%,transparent)}
+.research-section,.about-section{position:relative}
+.research-section::before,.about-section::before{content:"";position:absolute;top:0;bottom:0;left:calc(50% - 50vw);right:calc(50% - 50vw);z-index:-1;pointer-events:none;background:url(../media/texture/paper.webp) 0 0/600px,var(--paper);background-blend-mode:hard-light;opacity:.14}
+.research-section::before{background:url(../media/texture/sun-top.webp) 50% 0/1600px 1100px no-repeat,url(../media/texture/sun-low.webp) 50% 100%/1600px 1000px no-repeat,url(../media/texture/paper.webp) 0 0/600px,var(--paper);background-blend-mode:multiply,multiply,hard-light}
+/* Text on the textured paper keeps its contrast: the grey paper details pass WCAG AA on the darkest textured
+   background, the heading dots pass AA for large text, and the small labels are no lighter than they were on
+   plain ivory. */
+#publications .paper-citation,#publications .paper-topic{color:#5e675e}
+#publications .section-number,#about .section-number{color:#747f64}
+#about .about-record>.eyebrow{color:#74805a}
+#main .name-period{color:#768751}
 .hero-portrait::before{content:"";position:absolute;z-index:-1;pointer-events:none;top:3%;right:14%;width:160%;aspect-ratio:1000/760;background:url(../media/texture/palm-frond.svg) 0 0/100% 100% no-repeat}
 @media(max-width:1280px){.hero-portrait::before{width:135%}}
 @media(max-width:1199px){.hero-portrait::before{width:120%}}
@@ -258,7 +269,7 @@
 @media(max-width:1100px){.contact-section::after{display:none}}
 @media(max-width:780px){.work-section::before{height:min(760px,100%)}}
 @media(max-width:620px){.hero-portrait::before{right:auto;left:6%;width:min(150%,calc(100vw - 48px));transform:scaleX(-1)}}
-@media(forced-colors:active),print{.hero::before,.contact-section::before,.contact-section::after,.work-section::before,.hero-portrait::before{display:none}}
+@media(forced-colors:active),print{.hero::before,.research-section::before,.about-section::before,.contact-section::before,.contact-section::after,.work-section::before,.hero-portrait::before{display:none}}
 
 /* Research map: one focus, three selectable directions, six connected papers. */
 
